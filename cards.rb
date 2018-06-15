@@ -1,3 +1,7 @@
+def imprime_card(cartao)
+  puts "Card =>> #{cartao[:portugues]} | Card =>> #{cartao[:ingles]} encontrado" 
+end
+
 def menu()
     puts "Digite a opção desejada"
     puts "[1] Inserir um novo card"
@@ -19,26 +23,42 @@ while opcao != 4
     portugues = gets.chomp
     puts 'Insira uma expressão em Ingles:'
     ingles = gets.chomp
-    card = { Portugues: portugues,  Ingles: ingles }
+    card = { portugues: portugues,  ingles: ingles }
     cards << card 
     puts "Você inseriu o card: #{card} " 
     puts
 
   elsif opcao == 2
-    puts "Cards Cadastrados: "
+    puts "Aqui estão todos os cards cadastrados: "
     puts cards
 
   elsif opcao == 3
-    print "Informe o texto que está procurando: "
+    puts  "Em qual idioma deseja procurar?"
+    puts "[p] Português"
+    puts "[i] Inglês"
+    buscar_idioma = gets.chomp.upcase
+
+    print "digite seu card: "
     texto_busca = gets.chomp
+
+
     cards.each do |c|
-        c.include? texto_busca
-        puts "Card Encontrado: #{c}"
+      if buscar_idioma == "P"
+        if c[:portugues].include? texto_busca
+         imprime_card(c)
+        end
+      elsif 
+        if c[:ingles].include? texto_busca
+          imprime_card(c)
+        end
+      else
+        puts "opção inválida."
+      end
     end
 
   else
     puts 'entre com uma opcao válida'
     puts
   end
-  menu()
+  opcao = menu()
 end
